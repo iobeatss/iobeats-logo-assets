@@ -1,6 +1,6 @@
-# iobeats-logo-assets
+# iO Beats logo assets
 
-Official **IO Beats** logos for:  
+Official **iO Beats** logos for:  
 Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScreener.
 
 ---
@@ -37,10 +37,10 @@ Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScr
 
 ## 📜 Legal Notice
 
-The IO Beats logos contained in this repository are the exclusive property of **IO Beats**.  
+The iO Beats logos contained in this repository are the exclusive property of **iO Beats**.  
 They are provided **solely for identification and branding purposes** on blockchain explorers, analytics platforms, and related third-party services explicitly listed above.
 
-- ✅ **Authorized use**: display on partner platforms to identify the IO Beats token/project.  
+- ✅ **Authorized use**: display on partner platforms to identify the iO Beats token/project.  
 - ❌ **Unauthorized use**: any modification, commercial exploitation, or usage implying endorsement by IO Beats without prior written consent.  
 
-© 2025 IO Beats. All rights reserved.
+© 2025 iO Beats. All rights reserved.
