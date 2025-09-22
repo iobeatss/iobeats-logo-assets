@@ -10,7 +10,7 @@ Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScr
 | File | Preview | Description |
 |------|---------|-------------|
 | `IOB_FullLogo_OrangeWhite.png` | ![Full Logo](IOB_FullLogo_OrangeWhite.png) | Full logo (bear + text, orange/white) |
-| `IOB_Icon_Bear.png` | ![Token Icon](IOB_Icon_Bear.png) | **TOKEN icon** (standalone) |
+| `IOB_Icon_Bear.png` | ![Token Icon](IOB_Icon_Token.png) | **TOKEN icon** (standalone) |
 | `IOB_Wordmark_OrangeWhite.png` | ![Wordmark Orange White](IOB_Wordmark_OrangeWhite.png) | Wordmark logo (orange/white) |
 | `IOB_Wordmark_OrangeBlack.png` | ![Wordmark Orange Black](IOB_Wordmark_OrangeBlack.png) | Wordmark logo (orange/black) |
 
