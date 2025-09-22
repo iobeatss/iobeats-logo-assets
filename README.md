@@ -1,11 +1,42 @@
 # iobeats-logo-assets
 
-**Official IO Beats logos** for:  
+Official **IO Beats** logos for:  
 Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScreener.
 
 ---
 
-## Legal Notice
+## 🟠 Primary Logos
+
+| File | Preview | Description |
+|------|---------|-------------|
+| `IOB_FullLogo_OrangeWhite.png` | ![Full Logo](IOB_FullLogo_OrangeWhite.png) | Full logo (bear + text, orange/white) |
+| `IOB_Icon_Bear.png` | ![Token Icon](IOB_Icon_Bear.png) | **TOKEN icon** (standalone) |
+| `IOB_Wordmark_OrangeWhite.png` | ![Wordmark Orange White](IOB_Wordmark_OrangeWhite.png) | Wordmark logo (orange/white) |
+| `IOB_Wordmark_OrangeBlack.png` | ![Wordmark Orange Black](IOB_Wordmark_OrangeBlack.png) | Wordmark logo (orange/black) |
+
+---
+
+## 🔲 Standard Sizes
+
+| File | Preview | Description |
+|------|---------|-------------|
+| `IOB_Logo_250x250.png` | ![250x250](IOB_Logo_250x250.png) | Square logo, 250×250 PNG transparent |
+| `IOB_Logo_256x256.png` | ![256x256](IOB_Logo_256x256.png) | Square logo, 256×256 PNG transparent |
+| `IOB_Logo_64x64.png` | ![64x64](IOB_Logo_64x64.png) | Square logo, 64×64 PNG transparent |
+
+---
+
+## 🖼️ Explorer Icons
+
+| File | Preview | Description |
+|------|---------|-------------|
+| `IOB_Logo_32x32_pad3.png` | ![32x32 pad3](IOB_Logo_32x32_pad3.png) | Optimized 32×32 with 3px padding |
+| `IOB_Logo_32x32_pad4.png` | ![32x32 pad4](IOB_Logo_32x32_pad4.png) | Optimized 32×32 with 4px padding |
+| `IOB_Logo_32x32_pad4.svg` | — | SVG version, optimized for explorers |
+
+---
+
+## 📜 Legal Notice
 
 The IO Beats logos contained in this repository are the exclusive property of **IO Beats**.  
 They are provided **solely for identification and branding purposes** on blockchain explorers, analytics platforms, and related third-party services explicitly listed above.
