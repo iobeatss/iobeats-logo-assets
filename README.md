@@ -1,4 +1,4 @@
-# iO Beats logo assets
+# iO Beats Logo Assets
 
 Official **iO Beats** logos for:  
 Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScreener.
