@@ -30,7 +30,6 @@ Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScr
 
 | File | Preview | Description |
 |------|---------|-------------|
-| `IOB_Logo_32x32_pad4.png` | ![32x32 pad4](IOB_Logo_32x32_pad4.png) | Optimized 32×32 with 4px padding |
 | `IOB_Logo_32x32_pad4.svg` | ![32x32](IOB_Logo_32x32.svg) | SVG version, optimized for explorers |
 
 ---
