@@ -31,10 +31,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🔍 Verify image formats & sizes
+      # ⬇️ OPTIMISATION légère (PNG/SVG). Les GIF ne sont pas modifiés.
+      - name: 🗜️ Optimize PNG and SVG files
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+          ignorePaths: ".github/*"
+
+      # ⬇️ Vérifie les tailles mais IGNORE hero1.gif
+      - name: 🔍 Verify image formats & sizes (ignore hero1.gif)
         run: |
-          echo "Checking allowed formats and file sizes..."
-          find . -type f \( -name "*.png" -o -name "*.svg" -o -name "*.gif" \) -not -path "./.git/*" -not -path "./.github/*" > image_list.txt
+          echo "Checking allowed formats and sizes (2MB max, hero1.gif excluded)..."
+          # Liste des images à vérifier (on exclut .git, .github et hero1.gif)
+          find . -type f \( -name "*.png" -o -name "*.svg" -o -name "*.gif" \) \
+            -not -path "./.git/*" -not -path "./.github/*" -not -name "hero1.gif" > image_list.txt
 
           while IFS= read -r file; do
             size=$(stat -c%s "$file")
@@ -44,14 +55,7 @@ jobs:
             fi
           done < image_list.txt
 
-          echo "✅ All files under 2MB and valid formats."
-
-      - name: 🗜️ Optimize PNG and SVG files
-        uses: calibreapp/image-actions@main
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          compressOnly: true
-          ignorePaths: ".github/*"
+          echo "✅ All checked files are under 2MB. (hero1.gif was excluded from the check)"
 
       - name: 🧾 Compute tag
         id: tag
@@ -60,7 +64,7 @@ jobs:
           SUFFIX="${{ github.event.inputs.tag_suffix }}"
           echo "tag=v${DATE}${SUFFIX}" >> $GITHUB_OUTPUT
 
-      - name: 🗜️ Create ZIP package
+      - name: 📦 Create ZIP package (includes hero1.gif)
         run: |
           mkdir -p dist
           zip -r dist/iob-logo-assets.zip . -x ".git/*" ".github/*"
@@ -83,8 +87,9 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "IOB Logo Assets ${{ steps.tag.outputs.tag }}"
           body: |
-            🧡 **IO Beats Logo Pack**  
-            Optimized and validated image assets (PNG, SVG, GIF).
+            🧡 **IO Beats Logo Pack**
+            Optimized (PNG/SVG) and validated assets.
+            Note: `hero1.gif` is intentionally excluded from size checks.
 
             ${{ github.event.inputs.note }}
 
