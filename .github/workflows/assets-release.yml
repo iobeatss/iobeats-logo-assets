@@ -1,0 +1,51 @@
+name: 🚀 Logo Assets Auto Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.png'
+      - '**.svg'
+      - '**.gif'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Verify image files
+        run: |
+          echo "Checking allowed formats..."
+          invalid=$(find . -type f ! -name "*.png" ! -name "*.svg" ! -name "*.gif" ! -path "./.git/*")
+          if [ -n "$invalid" ]; then
+            echo "❌ Invalid files detected:"
+            echo "$invalid"
+            exit 1
+          fi
+          echo "✅ All image formats are valid."
+
+      - name: 🧾 Generate release tag
+        id: tag
+        run: |
+          DATE=$(date +'%Y.%m.%d')
+          echo "tag=v${DATE}" >> $GITHUB_OUTPUT
+
+      - name: 📦 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "IOB Logo Assets ${{ steps.tag.outputs.tag }}"
+          body: |
+            🧡 **IO Beats Logo Pack Release**
+            Includes new or updated assets (PNG, SVG, or GIF).
+            - Auto-verified by GitHub Actions.
+            - Ready for use across explorers and docs.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
