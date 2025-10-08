@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/iobeatss/iobeats-logo-assets/main/hero1.gif"
-       alt="IO Beats Treasury Banner" width="100%" />
+       alt="IO Beats Logo Banner" width="100%" />
 </p>
 
 ## 🔗 Quick Menu
@@ -10,50 +10,52 @@
   [iobeats-player](https://github.com/iobeatss/iobeats-player) ·
   [BeatsApe](https://github.com/iobeatss/BeatsApe) ·
   [iobeats-docs](https://github.com/iobeatss/iobeats-docs) ·
-  [iobeats-logo-assets](https://github.com/iobeatss/iobeats-logo-assets)  
+  [iobeats-logo-assets](https://github.com/iobeatss/iobeats-logo-assets)
 
-# iO Beats Logo Assets
+---
 
-Official **iO Beats** logos for:  
-Etherscan, BaseScan, BscScan, PolygonScan, Arbiscan, Coinscope, DexTools, DexScreener.
+# 🎨 iO Beats Logo Assets
+
+[![Branding](https://img.shields.io/badge/Branding-Official-orange.svg)](https://iobeats.com)
+[![Partners](https://img.shields.io/badge/Partners-Exchanges%20&%20Scanners-blue.svg)](#)
+[![License](https://img.shields.io/badge/Usage-Restricted-red.svg)](#)
+[![Audit](https://img.shields.io/badge/Audit-Cyberscope-brightgreen.svg)](https://raw.githubusercontent.com/cyberscope-io/audits/main/iob/audit.pdf)
+
+Official **IO Beats** logo pack for explorers, CEX/DEX listings, and DeFi analytics integrations:  
+**Etherscan**, **BaseScan**, **BscScan**, **PolygonScan**, **Arbiscan**, **CoinScope**, **DexTools**, **DexScreener**, and more.
 
 ---
 
 ## 🟠 Primary Logos
 
 | File | Preview | Description |
-|------|---------|-------------|
-| `IOB_Icon_Token.png` | ![Token Icon](IOB_Icon_Token.png) | **IOB TOKEN icon** (standalone) |
-| `IOB_FullLogo_OrangeWhite.png` | ![Full Logo](IOB_FullLogo_OrangeWhite.png) | Full logo (bear + text, orange/white) |
-| `IOB_Wordmark_OrangeWhite.png` | ![Wordmark Orange White](IOB_Wordmark_OrangeWhite.png) | Wordmark logo (orange/white) |
-| `IOB_Wordmark_OrangeBlack.png` | ![Wordmark Orange Black](IOB_Wordmark_OrangeBlack.png) | Wordmark logo (orange/black) |
+|------|----------|-------------|
+| `IOB_Icon_Token.png` | ![Token Icon](IOB_Icon_Token.png) | **Official $IOB token icon** (standalone, transparent) |
+| `IOB_FullLogo_OrangeWhite.png` | ![Full Logo](IOB_FullLogo_OrangeWhite.png) | **Main full logo** (bear + text, orange/white) |
+| `IOB_Wordmark_OrangeWhite.png` | ![Wordmark Orange White](IOB_Wordmark_OrangeWhite.png) | **Wordmark only** (orange text on white background) |
+| `IOB_Wordmark_OrangeBlack.png` | ![Wordmark Orange Black](IOB_Wordmark_OrangeBlack.png) | **Wordmark only** (orange text on black background) |
 
 ---
 
 ## 🔲 Standard Sizes
 
 | File | Preview | Description |
-|------|---------|-------------|
-| `IOB_Logo_250x250.png` | ![250x250](IOB_Logo_250x250.png) | Square logo, 250×250 PNG transparent |
-| `IOB_Logo_256x256.png` | ![256x256](IOB_Logo_256x256.png) | Square logo, 256×256 PNG transparent |
-| `IOB_Logo_64x64.png` | ![64x64](IOB_Logo_64x64.png) | Square logo, 64×64 PNG transparent |
+|------|----------|-------------|
+| `IOB_Logo_250x250.png` | ![250x250](IOB_Logo_250x250.png) | Square logo (250×250 PNG transparent) |
+| `IOB_Logo_256x256.png` | ![256x256](IOB_Logo_256x256.png) | Square logo (256×256 PNG transparent) |
+| `IOB_Logo_64x64.png` | ![64x64](IOB_Logo_64x64.png) | Compact logo for app icons (64×64 PNG transparent) |
 
 ---
 
-## 🖼️ Explorer Icons
+## 🖼️ Explorer & Exchange Icons
 
 | File | Preview | Description |
-|------|---------|-------------|
-| `IOB_Logo_32x32_pad4.svg` | ![32x32](IOB_Logo_32x32.svg) | SVG version, optimized for explorers |
+|------|----------|-------------|
+| `IOB_Logo_32x32.svg` | ![32x32](IOB_Logo_32x32.svg) | Optimized **SVG version** for blockchain explorers & token listings |
+
+> 💡 Tip: use the `IOB_Icon_Token.png` for DEX/CEX profile icons and `IOB_Logo_32x32.svg` for blockchain scanners.
 
 ---
 
-## 📜 Legal Notice
+## 📦 Folder Structure
 
-The iO Beats logos contained in this repository are the exclusive property of **iO Beats**.  
-They are provided **solely for identification and branding purposes** on blockchain explorers, analytics platforms, and related third-party services explicitly listed above.
-
-- ✅ **Authorized use**: display on partner platforms to identify the iO Beats token/project.  
-- ❌ **Unauthorized use**: any modification, commercial exploitation, or usage implying endorsement by IO Beats without prior written consent.  
-
-© 2025 iO Beats. All rights reserved.
