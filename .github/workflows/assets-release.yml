@@ -2,12 +2,21 @@ name: 🚀 Logo Assets Auto Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - '**.png'
-      - '**.svg'
-      - '**.gif'
+      - "**.png"
+      - "**.svg"
+      - "**.gif"
+  workflow_dispatch:
+    inputs:
+      tag_suffix:
+        description: "Suffix du tag (optionnel), ex: -rc.1"
+        required: false
+        default: ""
+      note:
+        description: "Notes additionnelles pour la release (optionnel)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -17,25 +26,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧩 Checkout repository
+      - name: 🧩 Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: 🔍 Verify image files
+      - name: 🔍 Verify allowed image formats
         run: |
-          echo "Checking allowed formats..."
-          invalid=$(find . -type f ! -name "*.png" ! -name "*.svg" ! -name "*.gif" ! -path "./.git/*")
+          echo "Checking for non-image files in repo (outside .git)..."
+          invalid=$(find . -type f ! -name "*.png" ! -name "*.svg" ! -name "*.gif" \
+                             ! -path "./.git/*" ! -path "./.github/*" )
           if [ -n "$invalid" ]; then
-            echo "❌ Invalid files detected:"
+            echo "❌ Invalid files detected (only PNG/SVG/GIF allowed at root & folders):"
             echo "$invalid"
             exit 1
           fi
-          echo "✅ All image formats are valid."
+          echo "✅ Formats OK"
 
-      - name: 🧾 Generate release tag
+      - name: 🗜️ Build ZIP package
+        run: |
+          mkdir -p dist
+          zip -r dist/iob-logo-assets.zip . -x ".git/*" ".github/*"
+          sha256sum dist/iob-logo-assets.zip | tee dist/iob-logo-assets.sha256
+
+      - name: 🧾 Compute tag
         id: tag
         run: |
           DATE=$(date +'%Y.%m.%d')
-          echo "tag=v${DATE}" >> $GITHUB_OUTPUT
+          SUFFIX="${{ github.event.inputs.tag_suffix }}"
+          TAG="v${DATE}${SUFFIX}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "Release tag -> ${TAG}"
+
+      - name: 🧠 Build changelog (since last tag if exists)
+        id: changelog
+        run: |
+          if git describe --tags --abbrev=0 >/dev/null 2>&1; then
+            LAST=$(git describe --tags --abbrev=0)
+            echo "Last tag: $LAST"
+            echo "## Changes since $LAST" > CHANGELOG_TMP.md
+            git log --pretty=format:"- %s (%h)" $LAST..HEAD >> CHANGELOG_TMP.md
+            echo "" >> CHANGELOG_TMP.md
+            echo "### Files changed" >> CHANGELOG_TMP.md
+            git diff --name-status $LAST..HEAD >> CHANGELOG_TMP.md
+          else
+            echo "First release for this repository." > CHANGELOG_TMP.md
+          fi
+          echo "extra_note<<EOF" >> $GITHUB_OUTPUT
+          echo "${{ github.event.inputs.note }}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: 📦 Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -43,9 +82,26 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "IOB Logo Assets ${{ steps.tag.outputs.tag }}"
           body: |
-            🧡 **IO Beats Logo Pack Release**
-            Includes new or updated assets (PNG, SVG, or GIF).
-            - Auto-verified by GitHub Actions.
-            - Ready for use across explorers and docs.
+            🧡 **IO Beats Logo Pack**
+            Auto-generated release containing PNG/SVG/GIF assets.
+
+            ${{ steps.changelog.outputs.extra_note }}
+
+            <details>
+            <summary>Changelog</summary>
+
+            $(cat CHANGELOG_TMP.md)
+
+            </details>
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📎 Upload ZIP & checksum to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          files: |
+            dist/iob-logo-assets.zip
+            dist/iob-logo-assets.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
