@@ -55,7 +55,30 @@ Official **IO Beats** logo pack for explorers, CEX/DEX listings, and DeFi analyt
 
 > 💡 Tip: use the `IOB_Icon_Token.png` for DEX/CEX profile icons and `IOB_Logo_32x32.svg` for blockchain scanners.
 
+
 ---
 
-## 📦 Folder Structure
+## ⚖️ Legal & Usage Policy
+
+The IO Beats logos are the **exclusive property of IO Beats DAO**.  
+They are provided **solely for identification and branding purposes** on verified platforms, explorers, and listings.
+
+- ✅ **Authorized use**: display on partner platforms or analytic explorers to identify IO Beats ($IOB)  
+- ❌ **Unauthorized use**: any modification, resale, or usage implying endorsement or partnership without written consent  
+
+📩 For partnership or listing requests: [contact@iobeats.com](mailto:contact@iobeats.com)
+
+---
+
+## 🧠 Reference
+
+- [iobeats.com](https://iobeats.com)  
+- [Snapshot Governance](https://snapshot.box/#/s:iobdao.eth)  
+- [Audit Report (Cyberscope)](https://www.cyberscope.io/audits/iob)  
+- [Treasury Transparency Hub](https://github.com/iobeatss/treasury)  
+
+---
+
+© 2025 **IO Beats DAO** — *Music. DeFi. Community.*
+
 
