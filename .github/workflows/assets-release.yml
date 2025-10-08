@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       tag_suffix:
-        description: "Suffix du tag (optionnel), ex: -rc.1"
+        description: "Suffix du tag (optionnel, ex: -rc.1)"
         required: false
         default: ""
       note:
@@ -26,55 +26,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧩 Checkout
+      - name: 🧩 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🔍 Verify allowed image formats
+      - name: 🔍 Verify image formats & sizes
         run: |
-          echo "Checking for non-image files in repo (outside .git)..."
-          invalid=$(find . -type f ! -name "*.png" ! -name "*.svg" ! -name "*.gif" \
-                             ! -path "./.git/*" ! -path "./.github/*" )
-          if [ -n "$invalid" ]; then
-            echo "❌ Invalid files detected (only PNG/SVG/GIF allowed at root & folders):"
-            echo "$invalid"
-            exit 1
-          fi
-          echo "✅ Formats OK"
+          echo "Checking allowed formats and file sizes..."
+          find . -type f \( -name "*.png" -o -name "*.svg" -o -name "*.gif" \) -not -path "./.git/*" -not -path "./.github/*" > image_list.txt
 
-      - name: 🗜️ Build ZIP package
-        run: |
-          mkdir -p dist
-          zip -r dist/iob-logo-assets.zip . -x ".git/*" ".github/*"
-          sha256sum dist/iob-logo-assets.zip | tee dist/iob-logo-assets.sha256
+          while IFS= read -r file; do
+            size=$(stat -c%s "$file")
+            if [ "$size" -gt 2000000 ]; then
+              echo "❌ $file exceeds 2MB (size: $size bytes)"
+              exit 1
+            fi
+          done < image_list.txt
+
+          echo "✅ All files under 2MB and valid formats."
+
+      - name: 🗜️ Optimize PNG and SVG files
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+          ignorePaths: ".github/*"
 
       - name: 🧾 Compute tag
         id: tag
         run: |
           DATE=$(date +'%Y.%m.%d')
           SUFFIX="${{ github.event.inputs.tag_suffix }}"
-          TAG="v${DATE}${SUFFIX}"
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "Release tag -> ${TAG}"
+          echo "tag=v${DATE}${SUFFIX}" >> $GITHUB_OUTPUT
 
-      - name: 🧠 Build changelog (since last tag if exists)
+      - name: 🗜️ Create ZIP package
+        run: |
+          mkdir -p dist
+          zip -r dist/iob-logo-assets.zip . -x ".git/*" ".github/*"
+          sha256sum dist/iob-logo-assets.zip | tee dist/iob-logo-assets.sha256
+
+      - name: 🧠 Generate changelog
         id: changelog
         run: |
           if git describe --tags --abbrev=0 >/dev/null 2>&1; then
             LAST=$(git describe --tags --abbrev=0)
-            echo "Last tag: $LAST"
             echo "## Changes since $LAST" > CHANGELOG_TMP.md
             git log --pretty=format:"- %s (%h)" $LAST..HEAD >> CHANGELOG_TMP.md
-            echo "" >> CHANGELOG_TMP.md
-            echo "### Files changed" >> CHANGELOG_TMP.md
-            git diff --name-status $LAST..HEAD >> CHANGELOG_TMP.md
           else
-            echo "First release for this repository." > CHANGELOG_TMP.md
+            echo "Initial release of iO Beats Logo Pack" > CHANGELOG_TMP.md
           fi
-          echo "extra_note<<EOF" >> $GITHUB_OUTPUT
-          echo "${{ github.event.inputs.note }}" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: 📦 Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -82,10 +83,10 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "IOB Logo Assets ${{ steps.tag.outputs.tag }}"
           body: |
-            🧡 **IO Beats Logo Pack**
-            Auto-generated release containing PNG/SVG/GIF assets.
+            🧡 **IO Beats Logo Pack**  
+            Optimized and validated image assets (PNG, SVG, GIF).
 
-            ${{ steps.changelog.outputs.extra_note }}
+            ${{ github.event.inputs.note }}
 
             <details>
             <summary>Changelog</summary>
@@ -96,7 +97,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 📎 Upload ZIP & checksum to Release
+      - name: 📎 Upload ZIP & checksum
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
