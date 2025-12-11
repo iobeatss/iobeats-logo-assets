@@ -44,8 +44,8 @@ Official **IO Beats** logo pack for explorers, CEX/DEX listings, and DeFi analyt
 | `IOB_Icon_Token_400x400.png` | ![400x400](IOB_Icon_Token_400x400.png) | Square logo (400×400 PNG transparent) |
 | `IOB_Logo_250x250.png` | ![250x250](IOB_Logo_250x250.png) | Square logo (250×250 PNG transparent) |
 | `IOB_Logo_256x256.png` | ![256x256](IOB_Logo_256x256.png) | Square logo (256×256 PNG transparent) |
-| `IOB_Icon_Token_50x50.png` | ![50x50](IOB_Icon_Token_50x50.png) | Compact token icon (50×50 PNG transparent) |
 | `IOB_Logo_64x64.png` | ![64x64](IOB_Logo_64x64.png) | Compact logo for app icons (64×64 PNG transparent) |
+| `IOB_Icon_Token_50x50.png` | ![50x50](IOB_Icon_Token_50x50.png) | Compact token icon (50×50 PNG transparent) |
 
 
 ---
